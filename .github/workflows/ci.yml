@@ -28,15 +28,13 @@ jobs:
     - name: Run linter
       run: |
         ruff check src/ tests/
+      continue-on-error: false
     
     - name: Check code formatting
       run: |
         ruff format --check src/ tests/
+      continue-on-error: false
     
-    - name: Run tests
+    - name: Run tests with coverage
       run: |
-        pytest -v --cov=src --cov-report=term-missing
-    
-    - name: Check test coverage
-      run: |
-        pytest --cov=src --cov-report=xml --cov-fail-under=80
+        pytest -v --cov=src --cov-report=term-missing --cov-report=xml --cov-fail-under=80
