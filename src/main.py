@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from datetime import datetime
+
 
 app = FastAPI(
     title = "Task Management API",
@@ -10,3 +12,9 @@ app = FastAPI(
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Task Management API"}
+
+@app.get("/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "timestamp": datetime.utcnow().isoformat() }
