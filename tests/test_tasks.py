@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+
 from src.main import app, task_storage
 
 client = TestClient(app)
@@ -91,8 +92,8 @@ class TestListTasks:
     def test_list_tasks_ordered_by_date(self):
         """Test that tasks are ordered newest first"""
         # Create tasks in order
-        response1 = client.post('/tasks', json={'title': 'First task'})
-        response2 = client.post('/tasks', json={'title': 'Second task'})
+        client.post('/tasks', json={'title': 'First task'})
+        client.post('/tasks', json={'title': 'Second task'})
 
         # List tasks
         response = client.get('/tasks')
