@@ -9,7 +9,7 @@ from src.logging_config import logger
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
-    '''Middleware to log all requests and responses'''
+    """Middleware to log all requests and responses"""
 
     async def dispatch(self, request: Request, call_next):
         # Generate request ID
@@ -23,8 +23,8 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                 'request_id': request_id,
                 'method': request.method,
                 'path': request.url.path,
-                'client': request.client.host if request.client else 'unknown'
-            }
+                'client': request.client.host if request.client else 'unknown',
+            },
         )
 
         # Track time
@@ -43,8 +43,8 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                     'method': request.method,
                     'path': request.url.path,
                     'status_code': response.status_code,
-                    'process_time': f'{process_time:.3f}s'
-                }
+                    'process_time': f'{process_time:.3f}s',
+                },
             )
 
             # Add request ID to response headers
@@ -63,8 +63,8 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                     'method': request.method,
                     'path': request.url.path,
                     'error': str(e),
-                    'process_time': f'{process_time:.3f}s'
+                    'process_time': f'{process_time:.3f}s',
                 },
-                exc_info=True
+                exc_info=True,
             )
             raise

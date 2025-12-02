@@ -1,4 +1,3 @@
-
 import pytest
 from fastapi.testclient import TestClient
 
@@ -7,18 +6,20 @@ from src.services.task_service import task_storage
 
 client = TestClient(app)
 
+
 @pytest.fixture(autouse=True)
 def clear_tasks():
-    '''Clear tasks before each test'''
+    """Clear tasks before each test"""
     task_storage.clear_all()
     yield
     task_storage.clear_all()
 
+
 class TestUpdateTask:
-    '''Tests for PATCH /tasks/{task_id} endpoint'''
+    """Tests for PATCH /tasks/{task_id} endpoint"""
 
     def test_update_task_status_success(self):
-        '''Test successful task status update'''
+        """Test successful task status update"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
@@ -33,7 +34,7 @@ class TestUpdateTask:
         assert data['updated_at'] is not None
 
     def test_update_task_to_completed(self):
-        '''Test updating task to completed status'''
+        """Test updating task to completed status"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
@@ -45,7 +46,7 @@ class TestUpdateTask:
         assert response.json()['status'] == 'completed'
 
     def test_update_task_priority_success(self):
-        '''Test successful task priority update'''
+        """Test successful task priority update"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
@@ -59,15 +60,14 @@ class TestUpdateTask:
         assert data['updated_at'] is not None
 
     def test_update_both_status_and_priority(self):
-        '''Test updating both status and priority'''
+        """Test updating both status and priority"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
 
         # Update both
         response = client.patch(
-            f'/tasks/{task_id}',
-            json={'status': 'in_progress', 'priority': 'high'}
+            f'/tasks/{task_id}', json={'status': 'in_progress', 'priority': 'high'}
         )
 
         assert response.status_code == 200
@@ -76,17 +76,14 @@ class TestUpdateTask:
         assert data['priority'] == 'high'
 
     def test_update_nonexistent_task(self):
-        '''Test updating a task that doesn't exist'''
-        response = client.patch(
-            '/tasks/nonexistent-id',
-            json={'status': 'completed'}
-        )
+        """Test updating a task that doesn't exist"""
+        response = client.patch('/tasks/nonexistent-id', json={'status': 'completed'})
 
         assert response.status_code == 404
         assert 'not found' in response.json()['detail'].lower()
 
     def test_update_with_invalid_status(self):
-        '''Test updating with invalid status'''
+        """Test updating with invalid status"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
@@ -97,7 +94,7 @@ class TestUpdateTask:
         assert response.status_code == 422
 
     def test_update_with_invalid_priority(self):
-        '''Test updating with invalid priority'''
+        """Test updating with invalid priority"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
@@ -108,7 +105,7 @@ class TestUpdateTask:
         assert response.status_code == 422
 
     def test_update_with_empty_body(self):
-        '''Test update with no fields provided'''
+        """Test update with no fields provided"""
         # Create a task
         create_response = client.post('/tasks', json={'title': 'Test task'})
         task_id = create_response.json()['id']
