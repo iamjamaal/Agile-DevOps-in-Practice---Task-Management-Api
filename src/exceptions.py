@@ -2,6 +2,7 @@
 
 from fastapi import HTTPException, status
 
+
 class TaskNotFoundException(HTTPException):
     '''Exception raised when a task is not found'''
     def __init__(self, task_id: str):
@@ -16,7 +17,7 @@ class InvalidTaskStatusException(HTTPException):
         valid_statuses = ['pending', 'in_progress', 'completed']
         super().__init__(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f'Invalid status \"{status}\". Must be one of: {', '.join(valid_statuses)}'
+            detail=f"Invalid status '{status}'. Must be one of: {', '.join(valid_statuses)}"
         )
 
 class InvalidPriorityException(HTTPException):
@@ -25,5 +26,5 @@ class InvalidPriorityException(HTTPException):
         valid_priorities = ['low', 'medium', 'high']
         super().__init__(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f'Invalid priority \"{priority}\". Must be one of: {', '.join(valid_priorities)}'
+            detail=f"Invalid priority '{priority}'. Must be one of: {', '.join(valid_priorities)}"
         )

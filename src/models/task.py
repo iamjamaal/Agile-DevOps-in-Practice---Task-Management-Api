@@ -1,8 +1,10 @@
 
-from pydantic import BaseModel, Field, field_validator
-from typing import Optional, Literal
-from datetime import datetime
+from datetime import datetime, timezone
+from typing import Literal, Optional
 from uuid import uuid4
+
+from pydantic import BaseModel, ConfigDict, Field
+
 
 class TaskCreate(BaseModel):
     '''Schema for creating a new task'''
@@ -17,16 +19,8 @@ class TaskUpdate(BaseModel):
 
 class Task(BaseModel):
     '''Complete task model'''
-    id: str = Field(default_factory=lambda: str(uuid4()), description='Unique task ID')
-    title: str = Field(..., min_length=1, max_length=200)
-    description: Optional[str] = Field(None, max_length=1000)
-    status: Literal['pending', 'in_progress', 'completed'] = Field(default='pending', description='Task status')
-    priority: Literal['low', 'medium', 'high'] = Field(default='medium', description='Task priority')
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: Optional[datetime] = Field(default=None)
-    
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             'example': {
                 'id': '123e4567-e89b-12d3-a456-426614174000',
                 'title': 'Complete project documentation',
@@ -37,3 +31,12 @@ class Task(BaseModel):
                 'updated_at': None
             }
         }
+    )
+
+    id: str = Field(default_factory=lambda: str(uuid4()), description='Unique task ID')
+    title: str = Field(..., min_length=1, max_length=200)
+    description: Optional[str] = Field(None, max_length=1000)
+    status: Literal['pending', 'in_progress', 'completed'] = Field(default='pending', description='Task status')
+    priority: Literal['low', 'medium', 'high'] = Field(default='medium', description='Task priority')
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: Optional[datetime] = Field(default=None)

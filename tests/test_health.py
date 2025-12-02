@@ -1,6 +1,7 @@
 
 import pytest
 from fastapi.testclient import TestClient
+
 from src.main import app
 from src.services.task_service import task_storage
 
@@ -50,12 +51,12 @@ def test_health_check_task_count_accuracy():
     # Initially should be 0
     response = client.get('/health')
     assert response.json()['tasks_count'] == 0
-    
+
     # Create 3 tasks
     client.post('/tasks', json={'title': 'Task 1'})
     client.post('/tasks', json={'title': 'Task 2'})
     client.post('/tasks', json={'title': 'Task 3'})
-    
+
     # Should now be 3
     response = client.get('/health')
     assert response.json()['tasks_count'] == 3
