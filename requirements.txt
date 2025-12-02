@@ -1,8 +1,6 @@
-cat > requirements.txt << 'EOF'
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
-EOF
 
-git add requirements.txt
-git commit -m "Setup: Add initial Python dependencies"
+fastapi
+uvicorn[standard]
+pytest
+pytest-asyncio
+httpx
