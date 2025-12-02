@@ -9,6 +9,9 @@ from src.middleware import RequestLoggingMiddleware
 from src.models.task import Task, TaskCreate, TaskUpdate
 from src.services.task_service import task_storage
 
+# Export task_storage for testing
+__all__ = ['app', 'task_storage']
+
 app = FastAPI(
     title='Task Management API',
     description='A simple task management system with monitoring and logging',
