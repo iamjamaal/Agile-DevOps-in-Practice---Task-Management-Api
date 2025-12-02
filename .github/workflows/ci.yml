@@ -35,8 +35,8 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest -v --cov=src --cov-report=term-missing
+        PYTHONPATH=. pytest -v --cov=src --cov-report=term-missing
     
     - name: Check test coverage
       run: |
-        pytest --cov=src --cov-report=xml --cov-fail-under=80
+        PYTHONPATH=. pytest --cov=src --cov-report=xml --cov-fail-under=80
