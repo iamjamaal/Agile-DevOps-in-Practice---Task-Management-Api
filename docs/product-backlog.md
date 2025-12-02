@@ -39,7 +39,7 @@ Acceptance Criteria:
 - Tasks are ordered by creation date (newest first)
 
 Story Points: 2  
-Priority: Should Have
+Priority: Must Have
 
 
 
