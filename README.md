@@ -59,7 +59,7 @@ Sprint 1
 Sprint 2
 - [Sprint 2 Plan](docs/sprint2-plan.md)
 - [Sprint 2 Review](docs/sprint2-review.md)
-- [Sprint 2 Retrospective](docs/sprint2-retrospec)
+- [Sprint 2 Retrospective](docs/sprint2-retrospective.md)
 
 
        CI/CD PIPELINE
