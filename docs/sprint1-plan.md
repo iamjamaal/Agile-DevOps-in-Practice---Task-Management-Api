@@ -1,7 +1,7 @@
 
                                  SPRINT 1_ PLAN
 
-SPRINT GOAL
+SPRINT GOAL: 
 Establish basic API functionality with health check and core task operations (create and list), and set up CI/CD pipeline with automated testing.
 
 
@@ -12,6 +12,7 @@ SELECTED USER STORIES
 - Story Points: 1
 - Priority: Must Have
 - Reason: Simple starter story; needed for monitoring
+
 
 2. US-001: Create Task
 - Story Points: 3

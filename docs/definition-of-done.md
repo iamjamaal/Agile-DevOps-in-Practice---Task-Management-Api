@@ -4,12 +4,9 @@
 A user story is considered "Done" when ALL of the following criteria are met:
 
  Code Quality
-- Code is written following PEP 8 style guidelines
-- Code is properly formatted (using black or similar)
 - No unused imports or variables
 - Functions have clear, descriptive names
 - Complex logic includes comments
-
 
 Testing
 - Unit tests are written for all new functions

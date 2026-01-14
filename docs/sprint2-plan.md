@@ -2,7 +2,7 @@
                        SPRINT 2 PLAN
 
 
- Sprint Goal
+ Sprint Goal: 
 Implement update and delete functionality for tasks, add priority levels, and establish comprehensive monitoring/logging capabilities while applying process improvements from Sprint 1 retrospective.
 
 
